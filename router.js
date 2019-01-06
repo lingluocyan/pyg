@@ -12,6 +12,7 @@ router.get('/login', account.login)
 router.get('/list/:id(\\d+)',list.index)
 //猜你喜欢
 router.get('/like',home.like)
-
+//查找功能
+router.get('/search',list.search)
 //exports 不能导出单个内容
 module.exports = router

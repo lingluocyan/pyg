@@ -13,7 +13,7 @@ const middleware = require('./middleware')
 
 //创建应用
 const app = express()
-app.listen(3000, () => console.log('=== server started ==='))
+app.listen(3000, () => console.log('running in 3000...'))
 
 //中间件
 //配置日志信息 morgan
