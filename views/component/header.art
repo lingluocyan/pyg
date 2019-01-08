@@ -37,9 +37,9 @@
           </div>
           <div class="yui3-u Center searchArea">
             <div class="search">
-              <form action="/search" class="sui-form form-inline">
+              <form action="/search" class="sui-form form-inline" autocomplete="off">
                 <div class="input-append">
-                  <input type="text" id="autocomplete" name="q" class="input-error input-xxlarge">
+                  <input type="text" id="autocomplete" name="q" class="input-error input-xxlarge" value="">
                   <button class="sui-btn btn-xlarge btn-danger">搜索</button>
                 </div>
               </form>

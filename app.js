@@ -7,9 +7,12 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const favicon = require('express-favicon')
 const logger = require('morgan')
-
 const router = require('./router')
 const middleware = require('./middleware')
+const session = require('express-session')
+const MySqlSession = require('express-mysql-session')
+const config = require('./config')
+const cookieParser = require('cookie-parser')
 
 //创建应用
 const app = express()
@@ -32,6 +35,20 @@ app.use('/', express.static(path.join(__dirname, './public')))
 //请求体解析  body-parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false})) //设置对象格式的请求体内容
+//配置cookie出来中间件
+app.use(cookieParser())
+//会话处理
+//这是一个构造函数首字母大写
+const MySqlStore = MySqlSession(session)
+const sessionStore = new MySqlStore(config.mysql)
+app.use(session({
+  key: 'PYGSID',
+  secret: 'pyg_secret',
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: false  
+}))
+
 //网站小图标中间件 响应图标 express-favicon
 app.use(favicon(path.join(__dirname, 'favicon.ico')))
 

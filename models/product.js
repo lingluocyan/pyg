@@ -38,3 +38,11 @@ exports.getSearchProducts = (q, page, size, sort) => {
     })
     .catch(err => Promise.reject(err))
 }
+
+//获取商品的详情信息
+//使用es6模板字符串传入需要的id(必须)
+//传入true则不带额外数据,false则带额外数据
+exports.getProduct = (id, isBasic) => {
+  return axios.get(`products/${id}` + (isBasic ? '' : '?include=introduce,category,pictures'))
+    .then(res => res.data).catch(err => Promise.reject(err))
+}

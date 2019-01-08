@@ -96,23 +96,27 @@
      </ul>
     </div>
    </div>
-   <div class="goods-list">
-    <ul class="yui3-g">
-     {{each list item i}}
-     <li class="yui3-u-1-5">
-      <div class="p-img"><a href="/item/{{item.id}}"><img src="{{item.thumbnail}}"></a></div>
-      <div class="price"><strong><em>¥</em><i>{{item.price}}</i></strong></div>
-      <div class="attr"><em>{{item.name}}</em></div>
-      <div class="commit"><i class="command">已有2000人评价</i></div>
-      <div class="operate">
-       <a href="cart-add.html" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-       <a href="#" class="sui-btn btn-bordered">对比</a>
-       <a href="#" class="sui-btn btn-bordered">关注</a>
-      </div>
-     </li>
-     {{/each}}
-    </ul>
-   </div>
+            <div class="goods-list">
+                {{if list.length}}
+                <ul class="yui3-g">
+                    {{each list item i}}
+                    <li class="yui3-u-1-5">
+                        <div class="p-img"><a href="/item/{{item.id}}"><img src="{{item.thumbnail}}"></a></div>
+                        <div class="price"><strong><em>¥</em><i>{{item.price}}</i></strong></div>
+                        <div class="attr"><em>{{item.name}}</em></div>
+                        <div class="commit"><i class="command">已有2000人评价</i></div>
+                        <div class="operate">
+                            <a href="cart-add.html" class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                            <a href="#" class="sui-btn btn-bordered">对比</a>
+                            <a href="#" class="sui-btn btn-bordered">关注</a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{else}}
+                <p style="font-size: 20px;line-height: 10">没找到您需要的商品！</p>
+                {{/if}}
+            </div>
    <!--渲染分页-->
    {{@pagination}}
   </div>

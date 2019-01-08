@@ -1,6 +1,7 @@
 const productModel = require('../models/product')
 const categoryModel = require('../models/category')
 const pagination = require('../utils/pagination')
+const qs = require('querystring')
 //渲染商品列表
 exports.index = (req, res, next) => {
   //这些数据都可以通过查询字符串获取参数,然后挂载到全局对象公用
@@ -36,7 +37,9 @@ exports.search = (req, res, next) => {
   const sort = req.query.sort || 'commend'
   const size = 5
   //调用getSearchProducts,传入参数,渲染页面
-  productModel.getSearchProducts(q, page, size, sort)
+  // 转url编码encodeURLComponent
+  //导入querystring模块进行url转码,防止搜索框出现乱码
+  productModel.getSearchProducts(qs.escape(q), page, size, sort)
     .then(data => {
       res.locals.q = q
       res.locals.sort = sort

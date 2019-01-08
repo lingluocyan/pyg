@@ -1,0 +1,86 @@
+{{extend './layout/frame.art'}}
+{{block 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-cart.css">
+{{/block}}
+{{block 'scripts'}}
+<script type="text/template" id="cartTpl">
+ <br>
+    <div class="cart-main">
+        <div class="yui3-g cart-th">
+            <div class="yui3-u-1-2">商品</div>
+            <div class="yui3-u-1-8">单价（元）</div>
+            <div class="yui3-u-1-8">数量</div>
+            <div class="yui3-u-1-8">小计（元）</div>
+            <div class="yui3-u-1-8">操作</div>
+        </div>
+        <div class="cart-item-list">
+            <div class="cart-body">
+                <div class="cart-list">
+                    <? var countAmount = 0 ?>
+                    <? var totalPrice = 0 ?>
+                    <? for(var i=0;i<list.length;i++){ ?>
+                    <? var item = list[i] ?>
+                    <? countAmount += item.amount ?>
+                    <? totalPrice += item.amount*item.price ?>
+                    <ul class="goods-list yui3-g">
+                        <li class="yui3-u-3-8">
+                            <div class="good-item">
+                                <div class="item-img">
+                                    <img src="<?=item.thumbnail?>">
+                                </div>
+                                <div class="item-msg"><?=item.name?></div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-8">
+                        </li>
+                        <li class="yui3-u-1-8">
+                            <span class="price">&yen;<?=item.price?></span>
+                        </li>
+                        <li class="yui3-u-1-8">
+                            <a href="javascript:;" class="increment mins">-</a>
+                            <input autocomplete="off"  type="text" value="<?=item.amount?>" class="itxt">
+                            <a href="javascript:;" class="increment plus">+</a>
+                        </li>
+                        <li class="yui3-u-1-8">
+                            <span class="sum"><?=(item.amount*item.price).toFixed(2)?></span>
+                        </li>
+                        <li class="yui3-u-1-8">
+                            <a href="javascript:;">删除</a>
+                        </li>
+                    </ul>
+                    <? } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-tool">
+        <div class="money-box">
+            <div class="sumprice">
+                <span><strong><?=countAmount?></strong> 件商品</span><br>
+                <span><em>总价（不含运费）：</em><i class="summoney">¥<?=totalPrice.toFixed(2)?></i></span>
+            </div>
+            <div class="sumbtn">
+                <a class="sum-btn" href="checkout.html">生成订单</a>
+            </div>
+        </div>
+    </div>
+</script>
+<script src="/assets/js/template-web.js"></script>
+<script>
+ $(function () {
+  //使用art-template 如果前后端都在同时使用 需要配置不同的解析规则
+  template.defaults.rules[0].test = /<\?(#?)((?:==|=#|[=-])?)[ \t]*([\w\W]*?)[ \t]*(-?)\?>/;
+  //1. 获取购物车列表数据 且完成渲染
+  $.get('/cart/list', function (data) {
+   $('.allgoods').html(template('cartTpl', data))
+  })
+ })
+</script>
+{{/block}}
+{{block 'content'}}
+<div class="py-container">
+ <div class="allgoods">
+  <!--TODO 是前端的模版引擎去做-->
+ </div>
+</div>
+{{/block}}

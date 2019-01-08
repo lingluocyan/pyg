@@ -10,10 +10,10 @@ exports.getSlider = () => {
   // }).catch(err => {
   //   return Promise.reject(err) //传递错误信息给下个promise对象的catch
   // })
-
+  //发送get请求获取轮播图数据
   return axios.get('settings/home_slides')
-    .then(res => res.data)
-    .catch(err => Promise.reject(err))
+  .then(res => res.data)
+  .catch(err=>Promise.reject(err))
 }
 
 

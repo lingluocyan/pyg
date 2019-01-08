@@ -1,3 +1,4 @@
+//配置公用信息
 const axios = require('axios')
 const config = require('../config')
 const instance = axios.create({
