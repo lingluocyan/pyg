@@ -27,7 +27,9 @@ const mysql = {
 //定义cookie相关配置
 const cookie = {
   cart_key: 'pyg_cart_key',
-  cart_expires: 30 * 24 * 60 * 60 * 1000
+  cart_expires: 30 * 24 * 60 * 60 * 1000,
+  remember_key:'remember_key',
+  remember_expires:7 * 24 * 60 * 60 * 1000
 }
 
 module.exports = {site, api, mysql, cookie}
